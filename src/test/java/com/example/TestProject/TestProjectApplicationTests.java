@@ -147,6 +147,7 @@ class TestProjectApplicationTests {
 	@Test
 	public void solution() {
 		int[] A = {23,333,33,30,0,505};
+		System.out.println("Testing by me");
 
 		for(int i=0;i<A.length;i++){
 
