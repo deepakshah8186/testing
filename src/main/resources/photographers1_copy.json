@@ -1,0 +1,19 @@
+{
+  "photographers": [
+    {
+      "name" : "deepak",
+      "rate" : 80
+    },
+    {
+      "name" : "pankaj",
+      "rate" : 70
+    },
+    {
+      "eventTypes": [
+          "wedding",
+          "birthday"
+      ]
+    }
+
+  ]
+}

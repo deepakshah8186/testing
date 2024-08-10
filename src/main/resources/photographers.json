@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "age": 32,
+    "email": "johndoe@example.com",
+    "genres": "landscape, portrait"
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "age": 27,
+    "email": "janesmith@example.com",
+    "genres": "wedding, portrait, food"
+  },
+  {
+    "id": 3,
+    "name": "Bob Johnson",
+    "age": 40,
+    "email": "bobjohnson@example.com",
+    "genres": "wildlife, landscape"
+  }
+]

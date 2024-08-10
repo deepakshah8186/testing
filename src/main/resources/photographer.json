@@ -1,0 +1,9 @@
+  {
+    "name": "John Doe",
+    "rate": 32,
+    "location": "California",
+    "eventTypes": [
+      "Wedding",
+      "Birthday"
+    ]
+  }

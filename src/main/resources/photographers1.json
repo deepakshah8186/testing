@@ -1,0 +1,16 @@
+{
+  "photographers": [
+    {
+      "rate": 1,
+      "name": "Ansel Adams",
+      "location": "California",
+      "events" : ["wedding","anniversary"]
+    },
+    {
+      "rate": 2,
+      "name": "Deepak Shah",
+      "location": "California",
+      "events" : ["wedding","anniversary"]
+    }
+  ]
+}
