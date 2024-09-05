@@ -1,0 +1,102 @@
+Spring boot interview questions:
+1. Constructor level injection vs field level injection in springboot 
+a) Immutability and Easy to Test: Dependencies are final, promoting immutability and 
+ensuring that they cannot be changed after object creation.
+b) In field injection, dependencies are injected directly into the fields using annotations like @Autowired
+   Fields are not final and hard to write tests
+
+2. How many bean scopes ? 
+a) Singleton Scope (Default)
+Description: A single instance of the bean is created and shared across the entire Spring context. The same instance 
+is injected whenever the bean is requested.When to use: When the bean is stateless, or when you want to maintain 
+a single shared instance across your application.  
+
+b) Prototype Scope
+Description: A new instance of the bean is created every time it is requested from the Spring container.
+When to use: When you need a new instance for each injection, typically for stateful beans or when handling 
+temporary or short-lived data.Container does not manages life cycle
+
+3. What is the difference between @Component vs @Configuration
+Beans are loaded from the classpath
+@Component is a generic annotation used to mark a class as a Spring-managed component. 
+It tells Spring that the class is a bean and should be automatically detected during classpath scanning.
+@Service, @Repository, and @Controller which are more specialized versions of @Component.
+The beans created by @Component are typically singleton by default, but you can change the scope using @Scope.
+
+@Configuration is a specialization of @Component, used specifically to define configuration classes. 
+It is used to declare beans explicitly via methods annotated with @Bean
+
+4. How do you handle exceptions ?
+Exception handling in Spring Boot can be done using:
+@ControllerAdvice: A global exception handler that handles exceptions for multiple controllers. 
+You can define methods annotated with @ExceptionHandler to specify how different exceptions should be handled.
+
+5. Profiles in Springboot.
+ You can use profiles (e.g., application-dev.properties, application-prod.yml )
+ java -jar myapp.jar --spring.profiles.active=prod
+
+
+Latency : Latency is the delay in time it takes for data to travel across a network or web application
+QPS can stand for queries per second, a metric used to measure the amount of traffic a server receives per second. 
+
+Q) See Top 10 interview questions on Springboot
+
+Q) Give an example where you handled production incident in java application
+
+Steps Taken to Resolve the Incident:
+1. Initial Investigation and Gathering Information
+Log Analysis: The first step was to check the application logs to identify any potential errors or bottlenecks. Using the central 
+logging system (e.g., ELK Stack), 
+I observed an increase in database-related warnings like connection timeout and slow query execution.
+
+Monitoring and Metrics: I quickly checked the monitoring tools like Prometheus and Grafana (or Spring Boot Actuator endpoints) 
+to analyze key metrics such as CPU usage, 
+memory consumption, database connection pool usage, and overall request latency. I noticed a sharp increase in database query execution time.
+
+2. Identifying the Root Cause
+Database Bottleneck: From the log analysis and metrics, it was clear that the database was taking longer than usual to execute queries. 
+I examined the slow queries
+ and found that a few specific queries related to fetching data for large reports were taking a long time, leading to the latency issue.
+
+Connection Pool Saturation: Additionally, the database connection pool (HikariCP in this case) was maxed out. This resulted in new incoming requests 
+being delayed while waiting for available connections.
+
+3. Immediate Mitigation (Temporary Fix)
+Connection Pool Configuration: I temporarily increased the size of the database connection pool in the Spring Boot configuration 
+(application.properties) to handle the increased load:
+
+properties
+Copy code
+spring.datasource.hikari.maximum-pool-size=50
+This allowed more concurrent database connections to be made, reducing the immediate pressure on the connection pool.
+
+Query Optimization: For the long-running queries, I applied an index on frequently queried columns in the database. This helped in reducing 
+the execution time of those slow queries.
+
+4. Root Cause Resolution (Long-Term Fix)
+Code Refactoring: I reviewed the application code where the slow queries were being generated. These queries were fetching large amounts of data
+ unnecessarily. I refactored the logic to:
+
+Pagination: Break down large queries into smaller chunks using pagination, which reduced the size of the result set returned by the database.
+Caching: Implemented caching (using Spring Cache with Redis) for certain frequently accessed data that didn’t change often, reducing the 
+number of calls made to the database.
+
+Q) Thing which you would like to change
+ RDBMS to DynamoDB
+ How to handle multiple update to the same row in database at the same time ? 
+ a) Optimistic lock vs Pessimistic Lock
+ b) @Transactional(rollback= Exception.class) // in event of error it(transactional annotation) just rolls back the error
+
+Q) Gateway(logs) to IAM(Identity) : Seperate api requests to get the header and offline tiicket . Then the actual api calls are made POST,GET(stateless)
+
+Q) What is AOP ? 
+Repeating the same code (like logging or transaction handling) in multiple places, leading to code duplication and making maintenance harder. 
+AOP helps to modularize these concerns by separating them into reusable aspects.You create LoggingAspect using @Aspect.In springboot it is enabled.
+Use Cases of AOP:
+Logging: Logging method calls, parameters, and execution times.
+Security: Applying security checks before method execution.
+Transaction Management: Starting and committing/rolling back transactions.
+Performance Monitoring: Measuring method execution time.
+Caching: Adding caching mechanisms around method executions.
+
+Q) Optimize DB failure . Use caching to optimize data fetch. indexing and increasing connection pool for short term . fine tuning query for long term.

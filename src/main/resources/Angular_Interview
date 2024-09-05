@@ -1,0 +1,40 @@
+1. Angular is a javascript binding framework which binds UI to model.MVVM framweowrk.Single page application using routers
+2. AngulaJs uses javascript and contoller arictecture but Angular uses typescript and component architecture. Support for Ionic is there.
+3. Directives helps to attach behaviuor to your html DOM.ngModel,hidden,{{}}
+SAC(Structure-change structure of DOM (ngfor),Attribute(hidden),Component(<my-grid/>))
+4. package.json - references of all javascript components,like pom has versions
+5. Typescript adds types to javascript.It gives you OOP features.Write class,interface,extends with Typescript
+6. CLI helps to create ready made project to kickstart with.npm install @angular/cli
+ng new myapp
+7. Binding code to bind view and model is called Components.Group of components is modules
+8. Decorator says what type of class is it. @Component ,@NgModule means angular module
+(You can create module by decorating it with annotation @NgModule)
+9. Templates are html view in Angular.It can be html file or inline
+  @Component({
+    templateURL:
+    template: inline
+  })
+ 10. Data binding : Interpolation binding in html element,property binding [ngModel] ,event binding(click)="Toggle",2 way binding [(ngModel)] 
+ 11. Architecture of Angular
+ 12. SPA(Single page application) : load once and dont load it again and again. Angular routing.
+ HomeRoutes = [
+  path: 'Login' ,component: LoginComponent
+  path: 'Home',component: HomeComponent
+ ]
+ In MasterPage.html,define router link and outlet
+ <[routerLink]=["Home"]Home
+ <[routerLink]=["Customer"]Customer
+
+ <router-outlet></router-outlet>
+
+ if you want to do from component use this.router.navigate["Home"]
+ 13. Lazy loading means on demand loading. Project needs to be divided into seperate modules like home,customers and then use loadChildren in HomeRoutes
+ 14. DI is the design pattern,common service,rather than creating an instance.In constructor we are asking to inject from outside.
+ We do by adding the class in providers property in @Ngmodule
+ @Ngmodule
+ providers: [
+  Token,
+  AuthGuard,
+  { provide: BaseLogger,useClass: HttpLogger}
+ ]
+ 15. Difference between ngserve and ngbuild : ng serve builds in RAM,good for local testing. ng build() --prod does in drive in Prod.Compressed js file,minify

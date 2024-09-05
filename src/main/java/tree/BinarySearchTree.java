@@ -45,9 +45,39 @@ public class BinarySearchTree {
         root.right.right = new TreeNode(9);
 
         TreeNode p = root.left; // Node with value 2
-        TreeNode q = root.right; // Node with value 8
+        TreeNode q = root.left.right; // Node with value 8
 
         TreeNode lca = tree.lowestCommonAncestor(root, p, q);
         System.out.println("Lowest Common Ancestor of " + p.val + " and " + q.val + " is: " + lca.val);
+    }
+
+//    public static void main(String[] args){
+//        BinarySearchTree bst = new BinarySearchTree();
+//
+//        TreeNode root = new TreeNode(2);
+//
+//        root.left = new TreeNode(6);
+//        root.right = new TreeNode(8);
+//        root.left.left = new TreeNode(12);
+//        root.left.right = new TreeNode(14);
+//
+//        TreeNode left = root.left;
+//        TreeNode right = root.right;
+//
+//        bst.lowestAnchestorOneMoretime(root,left,right);
+//    }
+
+    public TreeNode lowestAnchestorOneMoretime(TreeNode root,TreeNode p,TreeNode q){
+        if(root == null){
+            return null;
+        }
+        if(p.val < root.val && q.val< root.val){
+           return lowestAnchestorOneMoretime(root.left,p,q);
+        } else if ( p.val > root.val && q.val > root.val){
+           return lowestAnchestorOneMoretime(root.right,p,q);
+        } else {
+            return root;
+        }
+
     }
 }

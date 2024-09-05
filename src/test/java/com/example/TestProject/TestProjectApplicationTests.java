@@ -3,8 +3,9 @@ package com.example.TestProject;
 import com.google.gson.*;
 import dumm.Emp;
 import dumm.EmpRateComparator;
+import factorypattern.Bike;
 import factorypattern.Vehicle;
-import factorypattern.VehicleFactory;
+// import factorypattern.VehicleFactory;
 import mac.DataObject;
 import mac.DataStore;
 import mac.Employee;
@@ -27,9 +28,345 @@ import static java.util.stream.Collectors.toSet;
 class TestProjectApplicationTests {
 
 	@Test
-	void contextLoads() {
+	public void testSampleCode(){
+
+
+
 
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	@Test
+	public void elementClosestToAllValues(){
+
+		// angular https://www.questpond.com/most-important-angular-interview-questions-and-answers/cid45
+
+		// angular tutorial https://www.youtube.com/watch?v=-jeoyDJDsSM ,full playlist search by angular https://www.youtube.com/playlist?list=PLQMqUlV2_B8kyQcJF5duWG0mcVObngVsQ
+
+		// angular state management https://www.youtube.com/watch?v=kx0VTgTtSBg using ngrx
+
+		// final round AI discounts https://www.dontpayfull.com/at/finalroundai.com#c98433999
+
+//		There is a bug in one line of the code. Find it, fix it, and submit.
+//				Given a sorted array of integers a, your task is to determine which element of a is closest to all other values of a. In other words, find the element x in a, which minimizes the following sum:
+//
+//		abs(a[0] - x) + abs(a[1] - x) + ... + abs(a[a.length - 1] - x)
+//		(where abs denotes the absolute value)
+//
+//		If there are several possible answers, output the smallest one.
+//
+//				Example
+//
+//		For a = [2, 4, 7], the output should be solution(a) = 4.
+//
+//		for x = 2, the value will be abs(2 - 2) + abs(4 - 2) + abs(7 - 2) = 7.
+//		for x = 4, the value will be abs(2 - 4) + abs(4 - 4) + abs(7 - 4) = 5.
+//		for x = 7, the value will be abs(2 - 7) + abs(4 - 7) + abs(7 - 7) = 8.
+//		The lowest possible value is when x = 4, so the answer is 4.
+
+		    int[] a = {2,4,7};
+			int indexOfMinimum = -1;
+			int minimalSum = Integer.MAX_VALUE;
+
+			for (int i = 0; i < a.length; i++) {
+				int sum = 0;
+				for (int j = 0; j < a.length; j++) {
+					sum += Math.abs(a[j] - a[i]);
+				}
+				if (sum < minimalSum) {
+					minimalSum = sum;
+					indexOfMinimum = i;
+				}
+			}
+
+			// return a[indexOfMinimum];
+
+	}
+	@Test
+	public void testCode12(){
+
+		// amazon question,see screen shot
+		int[] packets = {1, 2, 3, 4, 5};
+		int channels = 2;
+
+		int maxQualitySum = maxSumOfQualities(packets, channels);
+		System.out.println("Maximum Sum of Qualities: " + maxQualitySum);
+
+
+
+	}
+
+	public static int maxSumOfQualities(int[] packets, int k) {
+		// Sort packets in descending order
+		Arrays.sort(packets);
+		int n = packets.length;
+
+		// Reverse the array to make it descending
+		for (int i = 0; i < n / 2; i++) {
+			int temp = packets[i];
+			packets[i] = packets[n - i - 1];
+			packets[n - i - 1] = temp;
+
+		}
+
+		System.out.println(packets);
+
+		int result = 0;
+
+		// Distribute packets to maximize the sum of medians
+		for (int i = 0; i < k; i++) {
+			result += packets[i / 2];
+		}
+
+		return result;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	@Test
+	void contextLoads() {
+		String s= "abcabcbb"; // 3
+		int max = Integer.MIN_VALUE;
+		int a_pointer = 0;
+		int b_pointer = 0;
+		HashSet<Character> set = new HashSet<>();
+		while(b_pointer < s.length()){
+			Character c = s.charAt(b_pointer);
+
+			if(!set.contains(c)) { // not seen
+				set.add(c);
+				b_pointer++;
+				max = Math.max(max,set.size());
+			} else {
+				set.remove(s.charAt(a_pointer));
+				a_pointer++;
+			}
+		}
+	}
+
+	// check these patterns to solve leet code  https://www.youtube.com/watch?v=DjYZk8nrXVY
+	// react video by Mosh on youtube.com for react
+	// good video on hooks https://www.youtube.com/watch?v=LlvBzyy-558
+	// good video on redux https://www.youtube.com/watch?v=5yEG6GhoJBs cosden soln
+	// zustand vs redux vs usecontext https://www.youtube.com/watch?v=_ngCLZ5Iz-0
+	// use chat gpt to find difference between above 3
+	// see video on react hook form https://www.youtube.com/watch?v=cc_xmawJ8Kg ( loading ,disabling button all is taken care of )
+	// good video on redux https://www.youtube.com/watch?v=poQXNp9ItL4 mosh
+
+
+
+	@Test
+	public void lengthOfLongestSubstring(){
+
+	}
+	@Test
+	public void longestConsecutiveSequenceDelete(){
+		int[] nums = {102,4,101,100,3}; // 1,2,3,4,100,200
+		int current_max = Integer.MIN_VALUE;
+		int count = 0;
+		Arrays.sort(nums);
+		for(int i=0;i<nums.length-1;i++){
+			if(nums[i] - nums[i+1] == -1){
+				count++;
+			} else {
+				current_max = Math.max(current_max, count);
+				count = 1;
+			}
+		}
+		current_max = Math.max(current_max, count);
+		System.out.println("Testing:"+current_max);
+	}
+
+	@Test
+	public void peakElementInMountainArray(){
+		int[] nums = {1, 3, 5, 6, 4, 2, 1};
+		int left = 0;
+		int right = nums.length-1;
+
+//		If arr[mid] < arr[mid + 1], this means we are in the increasing part of the array. Move the left pointer to mid + 1
+//		because the peak must be to the right.
+//      see chat gpt for the solution
+//		If arr[mid] >= arr[mid + 1], this means we are in the decreasing part of the array. Move the right pointer to mid
+//		because the peak might be at mid or to the left of mid.
+
+
+		while(left < right){
+			int mid = left + (right-left)/2;
+			if(nums[mid] < nums[mid+1]){
+				left = mid+1;
+			} else {
+				right = mid;
+			}
+		}
+
+		System.out.println("Testing"); // you can return left or right,bcos peak is only one
+	}
+
+	@Test
+	void binaryTreeLevelOrderSearch(){
+		// Kevin https://www.youtube.com/watch?v=XZnWETlZZ14 ( BFS )
+		// One more video https://www.youtube.com/watch?v=6ZnyEApgFYg&t=302s
+	}
+
+	@Test
+	void topKElements(){
+		int[] nums = {1, 1, 1, 2, 2, 3, 4, 4, 4, 4};
+		int k = 2;
+		int[] topK = topKFrequent(nums, k);
+		System.out.println("Top " + k + " frequent elements: " + Arrays.toString(topK));
+	}
+
+	public static int[] topKFrequent(int[] nums, int k) {
+		// Step 1: Count frequencies of each element
+		Map<Integer, Integer> frequencyMap = new HashMap<>();
+		for (int num : nums) {
+			frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+		}
+
+		Map<Integer,Integer> testMap = new HashMap();
+		for(Integer num:nums){
+			if(testMap.containsKey(num)){
+				testMap.put(num,testMap.get(num)+1);
+			} else {
+				testMap.put(num,1);
+			}
+		}
+		PriorityQueue<Map.Entry<Integer,Integer>> minHeap = new PriorityQueue<>(Comparator.comparing(Map.Entry::getKey));
+		for(Map.Entry entry:testMap.entrySet()){
+			minHeap.offer(entry);
+			if(minHeap.size()>k){
+				minHeap.poll();
+			}
+		}
+		int[] result = new int[k];
+		int index = 0;
+		for(Map.Entry<Integer,Integer> entry:minHeap){
+			result[index++] = entry.getKey();
+		}
+
+//		// Step 2: Use a min heap to keep track of top k elements
+//		PriorityQueue<Map.Entry<Integer, Integer>> minHeap = new PriorityQueue<>(
+//				(a, b) -> a.getValue() - b.getValue()
+//		);
+//
+//		// Step 3: Iterate over the frequency map and maintain the heap
+//		for (Map.Entry<Integer, Integer> entry : frequencyMap.entrySet()) {
+//			minHeap.offer(entry);
+//			if (minHeap.size() > k) {
+//				minHeap.poll();
+//			}
+//		}
+//
+//		// Step 4: Extract the results from the heap
+//		int[] result = new int[k];
+//		int index = 0;
+//		while (!minHeap.isEmpty()) {
+//			result[index++] = minHeap.poll().getKey();
+//		}
+
+		return result;
+	}
+
+	@Test
+	void testSeatArrangement(){
+		int [] example1 = new int[]{0,0,0,0,0,1,0,0}; // set of zeros which is longest,then middle of that
+		int [] example2 = new int[]{0,0,1,0,0};
+		int [] example3 = new int[]{0,0,0,1,1,0,0,0,0,0}; //
+		int [] example4 = new int[]{0,0,0,0,0};
+//
+//		Given an array of seats on a bench with 1 indicating someone is there and 0 indicating an available space. Find the next available space furthest away from the edges or other people.
+//
+//				Examples:
+//
+//[0,0,0,0,0,1,0,0] -> seat 2 should be returned, so [0,0,x,0,0,1,0,0]
+//[0,0,1,0,0] -> any of the 4 available seats are valid
+//[0,0,0,1,1,0,0,0,0,0] -> seat 7 should be returned, so [0,0,0,1,1,0,0,x,0,0]
+//[0,0,0,0,0] -> seat 2 should be returned, so [0,0,x,0,0]
+
+		// boolean isSomeSitting = true;
+		int counter = 0;
+		int current_max = Integer.MIN_VALUE;
+		for(int i=0;i <example3.length;i++){
+			int current = example1[i];
+			if(current == 0 ){
+				counter = counter + 1;
+			} else {
+				current_max = Math.max(current_max,counter);
+				counter = 0;
+			}
+
+		}
+		current_max = Math.max(current_max,counter);
+		System.out.println("Testing::" + current_max);
+		int middle = current_max/2;
+		System.out.println("Return middle : "+ middle);
+
+//		int [] example3 = new int[]{0,0,0,1,1,0,0,0,0,0};
+//
+//		map // 3,List<0
+// >
+	}
+
+	// In Java, heaps are special tree-based data structures that satisfy the heap property
 
 	@Test
 	void kthSmallestElementInATree(){
@@ -367,8 +704,20 @@ class TestProjectApplicationTests {
 	public void validAnagram(){
 		String s = "anagram";
 		String t = "nagaram";
+		List<List<String>> groupedAnagrams = new ArrayList<>();
+		Map<String,List<String>> map = new HashMap<>();
 		char[] arr = s.toCharArray();
 		char[] arrT = t.toCharArray();
+		char[] test = s.toCharArray();
+		String current = new String(test);
+		if(!map.containsKey(current)){
+			map.put(current,new ArrayList<>()).add(current);
+		} else {
+			map.get(current).add(t);
+		}
+		groupedAnagrams.addAll(map.values());
+		Arrays.sort(test);
+
 		Arrays.sort(arr);
 		Arrays.sort(arrT);
 
@@ -770,25 +1119,33 @@ class TestProjectApplicationTests {
        return new int[]{max,index};
     }
 
-	@Test
-	public void testCode1(){
-		System.out.println("Testing junits");
-		// login to chat gpt with hiiamdeepak2001@gmail.com. https://chatgpt.com/c/65250407-d567-4b4e-b3ca-4a6335d581bd
-		// design patterns . factory vs builder patterns
-		// Can you give example of factory vs builder pattern in Java. Check the key differences
-
-		// Can you please give me top 5 Design patterns java interview questions . Singleton,Object factory,Observer pattern, and builder pattern
-
-		// Factory Pattern: Abstracts the process of object creation and allows subclasses to alter the type of objects that will be created.
-		VehicleFactory vehicleFactory = new VehicleFactory();
-
-		Vehicle car = vehicleFactory.getVehicle("car");
-		car.drive();
-
-		Vehicle bike = vehicleFactory.getVehicle("bike");
-		bike.drive();
-
-	}
+//	@Test
+//	public void testCode1(){
+//		System.out.println("Testing junits");
+//		// login to chat gpt with hiiamdeepak2001@gmail.com. https://chatgpt.com/c/65250407-d567-4b4e-b3ca-4a6335d581bd
+//		// design patterns . factory vs builder patterns
+//		// Can you give example of factory vs builder pattern in Java. Check the key differences
+//
+//		// Can you please give me top 5 Design patterns java interview questions . Singleton,Object factory,Observer pattern, and builder pattern
+//
+//		// Factory Pattern: Abstracts the process of object creation and allows subclasses to alter the type of objects that will be created.
+//
+//		VehicleFactory vehickFactory1 = new VehicleFactory();
+//		Vehicle carVehicle = vehickFactory1.getVehicle("car");
+//		carVehicle.drive();
+//
+//		Vehicle bikeVehicle = new Bike();
+//		bikeVehicle.drive();
+//
+//		VehicleFactory vehicleFactory = new VehicleFactory();
+//
+//		Vehicle car = vehicleFactory.getVehicle("car");
+//		car.drive();
+//
+//		Vehicle bike = vehicleFactory.getVehicle("bike");
+//		bike.drive();
+//
+//	}
 
 	//        System.out.println("Testing.");
 //        Gson gson = new Gson();
@@ -842,14 +1199,19 @@ class TestProjectApplicationTests {
 		return myList;
 	}
 
-	public static boolean wordBreak(String s, List < String > wordDict) {
+	public static boolean wordBreak123(String s, List < String > wordDict) {
 		Set< String > wordDictSet = new HashSet< >(wordDict);
 		boolean[] dp = new boolean[s.length() + 1];
 		dp[0] = true;
+		StringBuilder sb = new StringBuilder();
 		for (int i = 1; i <= s.length(); i++) {
 			for (int j = 0; j < i; j++) {
 				String subString = s.substring(j, i);
 				if (dp[j] && wordDictSet.contains(subString)) {
+					sb.append("<b>");
+					sb.append(subString);
+					s = s.substring(subString.length(),s.length());
+					sb.append("</b>");
 					dp[i] = true;
 					break;
 				}
@@ -1419,12 +1781,13 @@ class TestProjectApplicationTests {
 //        }
 //        System.out.println("output" + output);
 
-		String s = "applepenapple";
-		Set<String> wordDict = new HashSet<String>();
-		wordDict.add("apple");
-		wordDict.add("pen");
+		String s = "abcxyz123";
+		Set<String> wordDict = new HashSet<String>(); // "cats","dog","sand","and","cat"
+			List<String> myWords = List.of("abc","123");
+		wordDict.add("abc");
+		wordDict.add("123");
 
-		if (wordBreak(s, wordDict)) {
+		if (wordBreak123(s, myWords)) {
 			System.out.println("String can be segmented into words from dictionary.");
 		} else {
 			System.out.println("String cannot be segmented into words from dictionary.");
@@ -1432,18 +1795,22 @@ class TestProjectApplicationTests {
 
 	}
 
-		@Test
+	@Test
 		public static boolean wordBreak(String s, Set<String> wordDict) {
 		// Create an array to store the results of subproblems
-		boolean[] dp = new boolean[s.length() + 1];
+		boolean[] dp = new boolean[s.length()];
 		dp[0] = true; // Empty string is always present in dictionary
-
+		StringBuilder sb = new StringBuilder();
 		// Process all substrings of the given string
 		for (int i = 1; i <= s.length(); i++) {
 			for (int j = 0; j < i; j++) {
 				// Check if the substring can be segmented and if the resulting
 				// substring is present in the dictionary
-				if (dp[j] && wordDict.contains(s.substring(j, i))) {
+				String subString = s.substring(j, i);
+				if (dp[j] && wordDict.contains(subString)) {
+					sb.append("<b>");
+					sb.append(subString);
+					sb.append("</b>");
 					dp[i] = true;
 					break;
 				}
