@@ -1,3 +1,70 @@
+IMP :
+1  Pagination and scrolling for large amount of data in UI application. Performance in UI
+2. To load the child component we will make ngAfterViewInit() lifecycle method ( AfterViewInit lifecycle )
+3.
+
+IMP : use fetch api and useeffect in React to make the api call
+
+n React, the UI can call the backend using various methods to send HTTP requests. The most common methods for making backend calls are:
+
+Using fetch API (native JavaScript API)
+Using Axios (a popular third-party library)
+Using GraphQL (for APIs built with GraphQL)
+1. Using fetch API
+The fetch API is a modern, native JavaScript method to make HTTP requests. It returns a promise and is widely used in React applications.
+
+Example:
+Here’s an example of how to use fetch in React to call a backend and retrieve data:
+
+javascript
+Copy code
+import React, { useEffect, useState } from 'react';
+
+function App() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // This effect runs after the component renders
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/posts/1') // URL of the backend API
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json(); // Parse JSON response
+      })
+      .then((data) => {
+        setData(data); // Set the data from the response
+        setLoading(false); // Set loading to false once the data is retrieved
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false); // Handle error
+      });
+  }, []); // Empty dependency array means this effect runs only once after the initial render
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  return (
+    <div>
+      <h1>Title: {data.title}</h1>
+      <p>{data.body}</p>
+    </div>
+  );
+}
+
+export default App;
+Explanation:
+fetch('url'): Sends an HTTP request to the backend at the specified URL.
+.then((response) => response.json()): Parses the response as JSON if the request is successful.
+.catch((error) => setError(error)): Handles errors such as network issues or invalid responses.
+useEffect(() => {}, []): Calls the fetch function after the component is rendered for the first time (componentDidMount equivalent).
+
+********************************************************************************************************************************
+
+
 1. Angular is a javascript binding framework which binds UI to model.MVVM framweowrk.Single page application using routers
 2. AngulaJs uses javascript and contoller arictecture but Angular uses typescript and component architecture. Support for Ionic is there.
 3. Directives helps to attach behaviuor to your html DOM.ngModel,hidden,{{}}

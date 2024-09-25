@@ -1,0 +1,67 @@
+3rd highest salary:
+SELECT MIN(salary)
+FROM (SELECT DISTINCT salary
+      FROM Employee
+      ORDER BY salary DESC
+      LIMIT 3) AS TopSalaries;
+The inner query selects the distinct salaries from
+the Employee table, orders them in descending order (ORDER BY salary DESC), and limits the result to the top 3 salaries.
+
+
+
+Top 5 sql query interview question
+ChatGPT said:
+ChatGPT
+Here are the top 5 SQL query interview questions that are frequently asked, especially to test a candidate's knowledge of SQL fundamentals, querying, and problem-solving skills:
+
+1. Find the Second Highest Salary
+Question: Write a SQL query to find the second-highest salary from the Employee table.
+
+sql
+Copy code
+SELECT MAX(salary)
+FROM Employee
+WHERE salary < (SELECT MAX(salary) FROM Employee);
+Follow-up: What if there are ties for the highest salary? How would you adapt this query?
+
+2. Find Employees With the Same Salary
+Question: Write a query to find all employees who have the same salary in the Employee table.
+
+sql
+Copy code
+SELECT salary, COUNT(*)
+FROM Employee
+GROUP BY salary
+HAVING COUNT(*) > 1;
+Follow-up: Can you list all employees who share a salary, along with their details?
+
+3. Get Department-wise Highest Salary
+Question: Write a SQL query to get the highest salary for each department.
+
+sql
+Copy code
+SELECT Department, MAX(Salary) as HighestSalary
+FROM Employee
+GROUP BY Department;
+Follow-up: How would you list the employee names along with the highest salary per department?
+
+4. Find Employees Who Don't Have Managers
+Question: Write a query to find all employees who do not have managers (assuming there is a manager_id column where a NULL value indicates no manager).
+
+sql
+Copy code
+SELECT EmployeeID, EmployeeName
+FROM Employee
+WHERE manager_id IS NULL;
+Follow-up: What if you want to find employees who are not managing anyone (i.e., who are not listed as a manager by anyone)?
+
+5. Join Multiple Tables (e.g., Employee and Department)
+Question: Write a query to display employee details along with their department name, assuming you have two tables: Employee and Department where Employee has a dept_id as a foreign key.
+
+sql
+Copy code
+SELECT e.EmployeeName, e.Salary, d.DepartmentName
+FROM Employee e
+JOIN Department d
+ON e.dept_id = d.dept_id;
+Follow-up: Can you modify the query to show all employees, including those who are not assigned to a department? (Hint: Use LEFT JOIN).

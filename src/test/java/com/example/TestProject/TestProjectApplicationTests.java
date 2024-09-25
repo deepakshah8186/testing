@@ -3,13 +3,11 @@ package com.example.TestProject;
 import com.google.gson.*;
 import dumm.Emp;
 import dumm.EmpRateComparator;
-import factorypattern.Bike;
-import factorypattern.Vehicle;
 // import factorypattern.VehicleFactory;
-import mac.DataObject;
-import mac.DataStore;
-import mac.Employee;
-import mac.Photographer;
+import Intuit.DataObject;
+import Intuit.DataStore;
+import Intuit.Employee;
+import Intuit.Photographer;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -28,10 +26,7 @@ import static java.util.stream.Collectors.toSet;
 class TestProjectApplicationTests {
 
 	@Test
-	public void testSampleCode(){
-
-
-
+	public void testCodingExercise(){
 
 	}
 
@@ -75,8 +70,366 @@ class TestProjectApplicationTests {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+	@Test
+	public void testCodeFor(){
+
+    // I = 1;
+	// V = 5;
+	// X= 10;
+	// L =50
+	// C = 100
+	// D = 500
+	// M =1000
+
+		//  LVIII 58
+		//  IX 9 as
+		// 1994 - MCMXCIV
+
+		HashMap<Character,Integer> map = new HashMap<>();
+		String input = "MCMXCIV"; // ouput = 58
+		int result = 0;
+		map.put('I',1);
+		map.put('V',5);
+		map.put('X',10);
+		map.put('L',50);
+		map.put('C',100);
+		map.put('D',500);
+		map.put('M',1000);
+       for(int i = 0;i<input.length();i++){
+		   int current = map.get(input.charAt(i));
+			if( i< input.length()-1 && current < map.get(input.charAt(i+1))){
+				result = result -current;
+			} else {
+				result = result + current;
+			}
+	   }
+	   System.out.println("Ouput" + result);
+	}
+
+	// convert duration to text. For example, if the input is 3665 seconds, the output will be:
+	// Duration: 1 hour 1 minute 5 seconds
+
+	public static String convertDurationToText(int seconds) {
+		// Calculate hours, minutes, and remaining seconds
+		int hours = seconds / 3600;
+		int minutes = (seconds % 3600) / 60;
+		int remainingSeconds = seconds % 60;
+
+		// Build a human-readable text representation
+		StringBuilder durationText = new StringBuilder();
+
+		if (hours > 0) {
+			durationText.append(hours).append(hours == 1 ? " hour " : " hours ");
+		}
+		if (minutes > 0) {
+			durationText.append(minutes).append(minutes == 1 ? " minute " : " minutes ");
+		}
+		if (remainingSeconds > 0 || (hours == 0 && minutes == 0)) {
+			durationText.append(remainingSeconds).append(remainingSeconds == 1 ? " second" : " seconds");
+		}
+
+		return durationText.toString().trim();
+	}
+
+//	Write a program to determine whether a number N is equal to sum of its proper positive divisor excluding itself
+//6 = 1+ 2+3
+//		28 = 1+2+4+7+14
+	public static boolean isEqualToSumOfDivisors(int N) {
+		// Initialize sum of divisors
+		int sum = 0;
+
+		// Iterate from 1 to N/2 to find proper divisors
+		for (int i = 1; i <= N / 2; i++) {
+			if (N % i == 0) {
+				sum += i;
+			}
+		}
+
+		// Check if sum of divisors is equal to N
+		return sum == N;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public int minimumBuckets(String hamsters) {
+
+		// a hamster at index i can be fed if you place a food bucket at index i - 1 and/or at index i + 1
+		HashSet<Integer> hamsterLocation = new HashSet<>();
+		for(int i=0;i<hamsters.length();i++){
+			char c = hamsters.charAt(i);
+			if(c=='H'){
+				hamsterLocation.add(i);
+			}
+		}
+		boolean canHamsterBefed = false;
+
+		for(int i=0;i<hamsterLocation.size();i++){
+			if(hamsterLocation.contains(i)){
+				if((i-1) >= 0 || (i+1) >=0 ){
+					canHamsterBefed = true;
+				}
+			}
+		}
+
+		return -1;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	@Test
+	public void onceAgain1(){
+		int[] prices = {7,1,5,3,6,4};
+		int max_profit = 0;
+		int min_value = Integer.MAX_VALUE;
+
+		for(int i=0;i<prices.length;i++){
+			int current = prices[i];
+			if(current < min_value){
+				min_value = current;
+			}
+			max_profit = Math.max(max_profit,current-min_value);
+		}
+	}
+	@Test
+	public void onceAgainValidParenthesis(){
+		String input = "{[]}";
+		Stack<Character> mystack = new Stack<>();
+		for(int i=0;i<input.length();i++){
+			char c = input.charAt(i);
+
+			if(isOpeningOneMoreTime(c)){
+				mystack.push(c);
+			} else {
+				if(isClosingMoreTime(c) && isOpeningOneMoreTime(mystack.peek())){
+					mystack.pop();
+				}
+			}
+
+		}
+
+		System.out.print(mystack.isEmpty());
+
+	}
+
+	boolean isOpeningOneMoreTime(Character c){
+		return OPENING_BRACKETS.indexOf(c) != -1;
+	}
+	boolean isClosingMoreTime(Character c){
+		return CLOSING_BRACKETS.indexOf(c) != -1;
+	}
+
+	@Test
+	public void testSampleCode(){
+
+    String expression = "A+B*C";
+	LinkedList<Character> list = new LinkedList<>();
+	Stack<Character> stack = new Stack<>();
+
+	for(int i=0;i<expression.length();i++){
+		char c = expression.charAt(i);
+
+		if(Character.isLetterOrDigit(c)){
+			list.add(c);
+		} else {
+			while(!stack.isEmpty() && precedence(c) <= precedence(stack.peek())){
+				list.add(stack.pop());
+			}
+			stack.push(c);
+		}
+	}
+	while(!stack.isEmpty()){
+		Character c = stack.pop();
+		list.add(c);
+	}
+
+		System.out.println(list);
+
+
+	}
+
+	public static int precedence(char ch) {
+		switch (ch) {
+			case '+':
+			case '-':
+				return 1;
+			case '*':
+			case '/':
+				return 2;
+			case '^':
+				return 3;
+		}
+		return -1;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	@Test
 	public void elementClosestToAllValues(){
+
+		// for hiring manager interview fo to their profile and check what they worked on
+
+		// Raj Singh has good linkedIn resume - https://www.linkedin.com/in/raj-singh-irvineca/details/experience/
 
 		// angular https://www.questpond.com/most-important-angular-interview-questions-and-answers/cid45
 
@@ -994,6 +1347,8 @@ class TestProjectApplicationTests {
 		// order service(uber eats) https://www.youtube.com/watch?v=uBn03yKnlT4 ( very nice simpla order mgt video )
 		// uber taxi, https://www.youtube.com/watch?v=umWABit-wbk&t=343s and https://www.youtube.com/watch?v=R_agd5qZ26Y
 		// payment processing - https://www.youtube.com/watch?v=olfaBgJrUBI - check chat gpt with" What are the examples of payment gateway in United states".
+		// TLS ( SSL is old) https://www.youtube.com/watch?v=THxIyHz191A . Anyone can intercept network and steal the data
+		// ask chat gpt to design payment system venmo,see payment folder. ask chat gpt for Implement wallet management service in Java
 		//  - ask chat gpt "Which payment gateway Intuit uses ? Intuit uses its own payment processing service.Adyen for UK
 		// tinder - https://www.youtube.com/watch?v=tndzLznxq40https://www.youtube.com/watch?v=tndzLznxq40 - done
 
@@ -1761,6 +2116,8 @@ class TestProjectApplicationTests {
 		// return -1;
 	}
 
+	// https://www.youtube.com/watch?v=iWenZCZEBIA ,nice explanation for word break
+
 		@Test
 		public void testWordBreak() {
 //        String s = "applepenapple";
@@ -2271,6 +2628,8 @@ class TestProjectApplicationTests {
 			}
 		}
 	}
+
+
 
 		@Test
 		public void isValid(){

@@ -1,7 +1,7 @@
 package dumcalls;
 
-import mac.Photographer;
-import mac.User;
+import Intuit.Photographer;
+import Intuit.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;

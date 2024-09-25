@@ -1,3 +1,7 @@
+Very IMP : See EmployeeImportance.java for solution and chat gpt. How employees value is written in []
+check TrustRelationship.java of how int[][] trust is converted into simple objects
+Flood fill and House Robber is DP programming
+
 Spring boot interview questions:
 1. Constructor level injection vs field level injection in springboot 
 a) Immutability and Easy to Test: Dependencies are final, promoting immutability and 
@@ -85,11 +89,17 @@ Q) Thing which you would like to change
  RDBMS to DynamoDB
  How to handle multiple update to the same row in database at the same time ? 
  a) Optimistic lock vs Pessimistic Lock
+  @Version  // This annotation enables optimistic locking
+     private int version;
+  LockModeType.PESSIMISTIC_READ
  b) @Transactional(rollback= Exception.class) // in event of error it(transactional annotation) just rolls back the error
 
 Q) Gateway(logs) to IAM(Identity) : Seperate api requests to get the header and offline tiicket . Then the actual api calls are made POST,GET(stateless)
 
-Q) What is AOP ? 
+Q) @EnableWebsecurity
+public class mysecurityconfigurer extends websecurityconfigureadaptor
+
+Q) What is AOP ?
 Repeating the same code (like logging or transaction handling) in multiple places, leading to code duplication and making maintenance harder. 
 AOP helps to modularize these concerns by separating them into reusable aspects.You create LoggingAspect using @Aspect.In springboot it is enabled.
 Use Cases of AOP:
@@ -100,3 +110,9 @@ Performance Monitoring: Measuring method execution time.
 Caching: Adding caching mechanisms around method executions.
 
 Q) Optimize DB failure . Use caching to optimize data fetch. indexing and increasing connection pool for short term . fine tuning query for long term.
+
+
+
+Q) What is the difference between interceptor and filter in Spring boot ?
+
+Use flag in properties files of Production so that we can flip and change

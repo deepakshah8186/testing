@@ -1,0 +1,171 @@
+Design patterns : https://www.youtube.com/watch?v=JFvSCobD7JU&t=263s
+
+1. See this video and all the playlist of this video https://www.youtube.com/watch?v=PwiuAebCruY   See those video with highest liked
+
+2. Why do we make a class immutable in Java ? Making class as final and no setters method will do
+ a) Thread safety - Immutable objects are inherently thread-safe, as they cannot be modified after they are created.
+ This means multiple threads can access immutable objects simultaneously without needing synchronization, as no thread can change the object’s state.
+
+ c) HashMap - Immutable objects are ideal for use as keys in collections such as HashMap or HashSet. Because the state of the object doesn't change
+
+ d) Immutable objects align with the principles of functional programming(React's state)
+
+ Collision in HashMap
+ After hashcode you get can get index of the bucket but it can happen they land on the same bucket.Hence collision happens. So linked list is used and both hashcode and equals methods are overridden
+
+ 3. Ask chat gpt for thread interview questions - Please give me java interview questions on thread.
+ ----------------------------------------------------------------
+ Here are some Java interview questions on threads that focus on multithreading concepts, concurrency, synchronization, and advanced thread handling in Java:
+
+ 1. Basics of Multithreading
+ Q1: What is a thread in Java? How is it different from a process?
+ Answer: A thread is a lightweight unit of execution within a process. A process can contain multiple threads, and they share the process’s resources (like memory and open files). Threads within the same process run in the same address space, making communication between them more efficient compared to processes.
+ Q2: How do you create a thread in Java?
+ Answer: In Java, you can create a thread in two ways:
+ By implementing the Runnable interface:
+ java
+ Copy code
+ public class MyRunnable implements Runnable {
+     public void run() {
+         System.out.println("Thread is running.");
+     }
+ }
+ Thread t = new Thread(new MyRunnable());
+ t.start();
+ By extending the Thread class:
+ java
+ Copy code
+ public class MyThread extends Thread {
+     public void run() {
+         System.out.println("Thread is running.");
+     }
+ }
+ MyThread t = new MyThread();
+ t.start();
+ Q3: What is the difference between start() and run() methods in a thread?
+ Answer:
+ start(): Initiates a new thread and calls the run() method asynchronously on that new thread.
+ run(): If you directly call run(), it will not create a new thread. Instead, it will execute in the current thread like a normal method call.
+ 2. Thread Lifecycle and States
+ Q4: What are the different states of a thread in Java?
+ Answer: A thread can be in one of the following states:
+ New: The thread is created but not started yet (before start()).
+ Runnable: The thread is ready to run or is running (after start()).
+ Blocked: The thread is waiting to acquire a monitor lock (synchronization).
+ Waiting: The thread is waiting indefinitely for another thread to perform a particular action (wait(), join()).
+ Timed Waiting: The thread is waiting for a specific period (sleep(), wait(long)).
+ Terminated: The thread has finished its execution.
+ Q5: What is the join() method in threads, and why is it used?
+ Answer: The join() method allows one thread to wait for the completion of another. When you call join() on a thread, the current thread will pause execution until the thread on which join() was called finishes executing.
+
+ java
+ Copy code
+ Thread t = new Thread(() -> {
+     System.out.println("Thread running");
+ });
+ t.start();
+ t.join(); // Main thread will wait until `t` finishes
+ 3. Thread Synchronization
+ Q6: What is thread synchronization, and why is it necessary?
+ Answer: Synchronization in Java is the capability to control the access of multiple threads to shared resources. Without synchronization, two threads can simultaneously access and modify shared data, leading to inconsistent and unpredictable results (race conditions).
+ Q7: How can you achieve synchronization in Java?
+ Answer:
+ Synchronized methods: Lock the object instance or class, ensuring that only one thread can execute the method at a time.
+ java
+ Copy code
+ public synchronized void synchronizedMethod() {
+     // synchronized code
+ }
+ Synchronized blocks: Provides more fine-grained control by locking specific blocks of code.
+ java
+ Copy code
+ public void someMethod() {
+     synchronized(this) {
+         // synchronized code
+     }
+ }
+ Q8: What is a race condition, and how can you avoid it?
+ Answer: A race condition occurs when two or more threads simultaneously access shared data and try to modify it, leading to incorrect results.
+
+ Avoidance: Race conditions can be avoided by synchronizing access to shared resources using synchronized blocks, methods, or concurrent utilities such as Lock or Atomic classes.
+
+ 4. Concurrency Utilities
+ Q9: What is the difference between synchronized and Lock in Java concurrency?
+ Answer:
+ synchronized is simpler to use but locks the entire method or block and releases the lock only after exiting the block.
+ Lock is a more flexible and explicit locking mechanism from the java.util.concurrent.locks package. It allows for:
+ Try-lock mechanism (tryLock()), which attempts to acquire the lock without waiting indefinitely.
+ Explicit locking and unlocking, allowing better control in complex use cases.
+ Q10: What are CountDownLatch and CyclicBarrier?
+ Answer:
+ CountDownLatch: Allows one or more threads to wait until a set of operations being performed in other threads completes. It is initialized with a count, and each time a thread finishes its work, it decrements the count. When the count reaches zero, the waiting thread proceeds.
+ CyclicBarrier: Used to make a set of threads wait for each other at a common barrier point. Once all threads reach the barrier, they proceed together. It can be reused after the threads are released.
+ Q11: What is the volatile keyword in Java, and when would you use it?
+ Answer: The volatile keyword ensures that changes to a variable are visible to all threads. A volatile variable is always read from and written to the main memory, ensuring visibility across threads. It is used when you need to ensure that multiple threads see the most up-to-date value of a variable, but it doesn't guarantee atomicity like synchronized.
+ 5. Advanced Threading Concepts
+ Q12: What is the difference between wait() and sleep() in Java?
+ Answer:
+ wait() is used for inter-thread communication. A thread releases the lock it holds and waits until another thread calls notify() or notifyAll() on the same object.
+ sleep() pauses the thread for a specified duration but doesn’t release any locks it holds.
+ Q13: Explain the concept of a Thread Pool in Java.
+ Answer: A thread pool is a collection of pre-initialized worker threads that execute tasks. Instead of creating new threads for every task, tasks are submitted to the thread pool, which assigns them to available threads. This improves performance, especially in environments where thread creation overhead is significant.
+
+ Java provides Executors to create thread pools:
+
+ java
+ Copy code
+ ExecutorService pool = Executors.newFixedThreadPool(4);
+ pool.execute(new RunnableTask());
+ Q14: What are Callable and Future in Java?
+ Answer:
+
+ Callable is similar to Runnable, but it can return a result and throw a checked exception.
+ Future represents the result of an asynchronous computation. You can use Future to check if the computation is complete, retrieve the result, or cancel the task.
+ Example:
+
+ java
+ Copy code
+ ExecutorService executor = Executors.newSingleThreadExecutor();
+ Callable<Integer> task = () -> {
+     return 42;
+ };
+ Future<Integer> future = executor.submit(task);
+ Integer result = future.get(); // Retrieve the result
+ Q15: How does ThreadLocal work in Java?
+ Answer: ThreadLocal provides each thread with its own independent copy of a variable. Each thread can access and modify its own copy without interfering with others.
+
+ Example:
+
+ java
+ Copy code
+ ThreadLocal<Integer> threadLocal = new ThreadLocal<>();
+ threadLocal.set(100); // Set a value specific to the current thread
+ Integer value = threadLocal.get(); // Get the value for the current thread
+ 6. Deadlocks and Solutions
+ Q16: What is a deadlock, and how can you prevent it in Java?
+ Answer: A deadlock occurs when two or more threads are waiting for each other to release resources, resulting in all threads being blocked forever.
+
+ Prevention strategies:
+
+ Avoid nested locks: Try to acquire locks in the same order to avoid circular wait conditions.
+ Use tryLock(): Use timed locking with Lock.tryLock() to avoid indefinite blocking.
+ Deadlock detection tools: Use tools like thread dump analyzers to detect deadlocks in complex applications.
+ Q17: Explain the concept of a ReentrantLock.
+ Answer: ReentrantLock is a type of lock provided in java.util.concurrent.locks package. It allows a thread to acquire the same lock multiple times without causing a deadlock. The thread can lock it repeatedly and must unlock it the same number of times.
+
+ Example:
+
+ java
+ Copy code
+ ReentrantLock lock = new ReentrantLock();
+ lock.lock();
+ try {
+     // critical section
+ } finally {
+     lock.unlock();
+ }
+ ----------------------------------------------------------------------------
+ 4. Can you please give me example of callable and future in Java ?
+
+ Callable: Similar to Runnable, but it can return a result or throw an exception.
+ Future: Represents the result of an asynchronous computation. It allows you to check if the computation is complete, retrieve the result, or cancel the task.

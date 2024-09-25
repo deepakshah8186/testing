@@ -1,7 +1,7 @@
 package dums;
 
-import mac.DataStore;
-import mac.Photographer;
+import Intuit.DataStore;
+import Intuit.Photographer;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;

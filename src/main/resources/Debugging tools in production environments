@@ -1,0 +1,305 @@
+Debugging issues in production environments is crucial, and there are several tools and strategies available to help you diagnose, troubleshoot, and resolve problems effectively. Here are the key debugging tools and techniques used for production support:
+
+https://www.youtube.com/watch?v=h4Sl21AKiDg graphana vs splunk
+
+1. Log Management Tools
+Logs are one of the most important sources of information for production debugging.
+
+a. Log Aggregators
+ELK Stack (Elasticsearch, Logstash, Kibana): This stack is widely used for log aggregation, searching, and visualization. Logs from different services can be sent to Logstash, stored in Elasticsearch, and analyzed in Kibana through dashboards and searches.
+
+Graylog: Another centralized log management tool with powerful search and alerting capabilities.
+
+Splunk: An enterprise-level platform for operational intelligence. It indexes machine-generated data like logs and provides real-time search, analysis, and visualization.
+
+Fluentd: An open-source log management tool that can be used with various log storage backends.
+
+b. Log Levels and Custom Logging
+Log Levels: Proper use of log levels (DEBUG, INFO, WARN, ERROR) ensures that logs are concise and meaningful in production environments. In a production setting, it’s common to set the log level to INFO or WARN, while DEBUG can be temporarily enabled when needed.
+
+Custom Logging: Add more detailed or context-aware logs around the problematic areas to help in identifying the exact issue.
+
+2. APM (Application Performance Monitoring) Tools
+APM tools monitor the performance of your application and provide insights into slow components, error-prone code, and bottlenecks.
+
+a. New Relic
+New Relic provides deep application performance insights, including transaction tracing, database monitoring, and real-time error tracking. It’s useful for identifying slow database queries, memory leaks, and high CPU usage.
+
+b. Dynatrace
+Dynatrace offers full-stack monitoring with AI-driven insights. It automatically detects anomalies and provides detailed transaction tracing, including distributed tracing across microservices.
+
+c. AppDynamics
+AppDynamics provides real-time monitoring of application performance with detailed insights into application tiers, services, databases, and infrastructure. It offers automatic baselining, performance metrics, and deep diagnostics.
+
+d. Datadog
+Datadog integrates metrics, traces, and logs for monitoring distributed systems. It provides detailed performance information for applications, databases, and cloud services.
+
+3. Distributed Tracing Tools
+Distributed tracing tools track the flow of requests across microservices or different components, helping to debug latency issues or failures in a distributed environment.
+
+a. Jaeger
+Jaeger is an open-source tool for distributed tracing, which helps you trace requests across multiple services and understand performance bottlenecks in a microservice architecture.
+
+b. Zipkin
+Zipkin is another distributed tracing tool that helps track the flow of requests and identifies where latency is occurring within a distributed system.
+
+c. OpenTelemetry
+OpenTelemetry is an open-source observability framework that provides unified tracing, metrics, and logging. It can be used in combination with backends like Jaeger, Zipkin, or Prometheus for distributed tracing.
+
+4. Error Monitoring Tools
+These tools help track and monitor errors that occur in production in real-time.
+
+a. Sentry
+Sentry is an error-tracking tool that provides detailed reports on exceptions and crashes in production. It supports many languages and frameworks, including Java, Python, JavaScript, and more. It provides stack traces, context, and the ability to aggregate similar errors.
+
+b. Rollbar
+Rollbar provides real-time error monitoring and crash reporting, with rich metadata to help debug issues. It can track errors across the stack and notify developers instantly.
+
+c. Raygun
+Raygun is a comprehensive error and performance monitoring tool that offers detailed error reports and crash analytics for web and mobile applications.
+
+5. System Monitoring Tools
+System monitoring tools track server and infrastructure metrics like CPU, memory, disk usage, and network traffic.
+
+a. Prometheus and Grafana
+Prometheus: A popular open-source system monitoring tool, ideal for collecting time-series data from applications and servers. It offers alerting and is often used in combination with Grafana.
+
+Grafana: A visualization tool used with Prometheus for creating real-time dashboards of metrics (e.g., CPU, memory, network).
+
+b. Nagios
+Nagios is an open-source monitoring tool that provides infrastructure and application monitoring. It generates alerts based on thresholds and can monitor servers, applications, and network devices.
+
+c. Zabbix
+Zabbix is a free and open-source enterprise-level monitoring solution for infrastructure, network, and applications.
+
+d. CloudWatch (AWS)
+If you're running on AWS, CloudWatch provides detailed monitoring of AWS resources and applications. You can set alarms, view metrics, and get detailed logs.
+
+6. Remote Debugging Tools
+Remote debugging allows developers to connect to a production environment to debug live applications, which must be done cautiously.
+
+a. Java Remote Debugging (JDWP)
+For Java applications, the Java Debug Wire Protocol (JDWP) allows remote debugging. You can attach a debugger (e.g., IntelliJ or Eclipse) to a running JVM process in production using -agentlib:jdwp options.
+
+b. SSH and Remote Shells
+Secure Shell (SSH) can be used to access production servers remotely for inspecting logs, running diagnostics, or monitoring running processes.
+
+7. Database Profiling and Query Analysis Tools
+Debugging performance or data issues often involves analyzing the database and its queries.
+
+a. pgAdmin (PostgreSQL) / MySQL Workbench
+These tools provide graphical user interfaces for managing databases and analyzing query performance.
+
+b. Database Query Logs
+Enabling slow query logging or profiling tools (e.g., EXPLAIN in SQL queries) helps identify inefficient or long-running queries.
+
+c. Database Performance Monitoring Tools
+SolarWinds Database Performance Analyzer
+Percona Monitoring and Management (PMM): An open-source platform that monitors the performance of MySQL, MongoDB, PostgreSQL, and other databases.
+8. Thread Dump and Heap Dump Analysis
+For debugging JVM-based applications (e.g., Java, Scala), thread and heap dumps provide insights into memory usage and thread activity.
+
+a. jStack and jMap
+Java provides jstack for obtaining thread dumps and jmap for heap dumps. These tools help identify deadlocks, memory leaks, and other performance issues.
+
+b. VisualVM
+VisualVM is a profiling and monitoring tool for Java applications. It provides an easy-to-use graphical interface to analyze thread dumps, heap dumps, and JVM metrics.
+
+c. Eclipse MAT (Memory Analyzer Tool)
+Eclipse MAT helps analyze Java heap dumps to identify memory leaks and objects that occupy the most memory.
+
+9. Network Monitoring Tools
+These tools are useful for tracking network traffic, latency, and diagnosing network-related issues.
+
+a. Wireshark
+Wireshark is a packet analyzer that can capture and analyze network traffic in real time. It helps in identifying latency issues, packet loss, and network bottlenecks.
+
+b. Netstat
+netstat is a command-line tool that provides network connection details, including active connections, routing tables, and listening ports.
+
+c. Ping, Traceroute
+Basic tools like ping and traceroute help diagnose network connectivity issues, identify latency, or detect routing issues.
+
+10. Chaos Engineering Tools
+These tools simulate failures and help you assess the resilience and stability of production systems.
+
+a. Chaos Monkey
+Developed by Netflix, Chaos Monkey randomly terminates instances in production to test the resilience and self-healing capabilities of microservices architectures.
+
+b. Gremlin
+Gremlin is a chaos engineering tool that allows you to simulate various types of failures (e.g., CPU, memory spikes, network outages) in production-like environments.
+
+Conclusion
+To successfully support production systems, it's important to use a combination of log management, APM, monitoring, and debugging tools. The tools selected depend on the nature of the application and the infrastructure in place. Proper instrumentation of logs, metrics, and distributed tracing from the beginning helps ensure that when problems arise, they can be quickly diagnosed and resolved.
+
+=> Splunk query example. Give hostname ,sort by data
+1) index=web_logs sourcetype=access_combined
+| table _time, clientip, method, uri_path, status
+
+2) index=web_logs sourcetype=access_combined
+   | stats count by clientip, uri_path
+   | sort -count
+
+3) index=web_logs sourcetype=access_combined
+| rex field=_raw "GET\s+(?<endpoint>/\S+)"
+| table _time, clientip, endpoint, status
+
+=> What to consider when developing wallet api in java ?
+
+Rate limiting(req. should not exceed) and tokenization ( create token for acc no and keep it in PCI vault?
+
+Q) What to consider when developing wallet api in java ?
+
+When developing a wallet API in Java, there are several important considerations to ensure the system is secure, scalable, efficient, and user-friendly. Wallet APIs typically deal with sensitive financial data,
+so extra attention is required in various areas. Below are key factors to consider:
+
+1. Security
+Security is the top priority in any wallet or financial system API. Consider the following:
+
+a. Authentication and Authorization
+Use OAuth 2.0 or JWT (JSON Web Tokens) for secure authentication and authorization.
+Implement role-based access control (RBAC) to limit permissions for different types of users or services.
+b. Encryption
+Encrypt sensitive data (e.g., card details, transaction information) both in transit (using TLS/SSL) and at rest (using AES or another strong encryption algorithm).
+Implement tokenization for storing payment details to avoid directly storing sensitive card information.
+c. Data Privacy and Compliance
+Comply with standards like PCI-DSS for handling payment card information.
+Ensure compliance with GDPR, CCPA, and other data privacy regulations if dealing with user information.
+d. API Security Best Practices
+Use HTTPS for all API communication.
+Implement rate limiting to prevent abuse or denial-of-service (DoS) attacks.
+Use HMAC or digital signatures to ensure data integrity and authenticity of API requests.
+e. Two-Factor Authentication (2FA)
+For enhanced security, consider implementing 2FA for users when accessing wallet features.
+2. Transaction Management
+Handling transactions is a critical part of a wallet API. Consider the following:
+
+a. Atomicity
+Transactions should be atomic. Either all operations (e.g., debit from one account, credit to another) succeed or none do.
+Use ACID principles to ensure transactional integrity, especially with database operations.
+b. Concurrency Control
+If multiple users are accessing and updating wallet balances concurrently, implement proper concurrency control mechanisms, such as optimistic locking or pessimistic locking.
+c. Idempotency
+Ensure API endpoints, particularly those dealing with money transfers, are idempotent to prevent duplicate transactions. This ensures that if a request is processed multiple times, the outcome will be the same.
+d. Error Handling
+Provide robust error handling and ensure proper rollback mechanisms for failed transactions.
+Return clear and consistent error codes for different failure scenarios (e.g., insufficient balance, invalid credentials, etc.).
+3. Scalability and Performance
+The wallet system should be scalable to handle increased usage and efficient to ensure fast response times:
+
+a. Load Balancing
+Use load balancers to distribute API requests across multiple servers to handle increased traffic and avoid server overload.
+b. Caching
+Implement caching where appropriate to reduce the load on the database, such as caching user details or balance queries using tools like Redis or Memcached.
+c. Asynchronous Processing
+Offload heavy tasks (e.g., notifications, ledger updates) to background jobs using asynchronous processing tools like RabbitMQ or Kafka.
+d. Database Scaling
+Use horizontal scaling or database sharding for high-traffic systems.
+Consider NoSQL databases like MongoDB for faster reads if the system requires handling large-scale, unstructured transaction data.
+4. Consistency
+a. Distributed Ledger
+If your wallet involves multiple services or microservices, consider using a distributed ledger or event sourcing approach to maintain a consistent view of transactions across services.
+b. Data Synchronization
+Ensure that all services (especially in a microservice architecture) have a consistent view of wallet balances and transaction histories.
+5. Wallet Operations
+Wallet APIs typically need to support various financial operations:
+
+a. Balance Inquiry
+Provide endpoints to check current wallet balance.
+b. Add/Withdraw Funds
+Provide operations for users to fund or withdraw from their wallets, ensuring real-time updates and reflecting changes in balance.
+c. Transaction History
+Offer an endpoint to fetch a user’s transaction history, possibly paginated, and filtered by date or type of transaction.
+d. Currency Support
+If your wallet deals with multiple currencies, ensure accurate conversion rates and manage currency conversion fees.
+6. Monitoring and Logging
+a. Real-time Monitoring
+Set up real-time monitoring of transactions, API usage, and errors using tools like Prometheus, Grafana, or Splunk.
+b. Audit Logging
+Maintain an audit trail of all user actions and system changes to comply with regulatory requirements and facilitate debugging.
+7. API Design and Documentation
+a. RESTful API
+Use REST principles for designing your API, making sure it's intuitive and easy to use.
+Follow best practices for resource naming, HTTP methods (GET, POST, PUT, DELETE), and response codes.
+b. API Versioning
+Implement API versioning to allow future changes without breaking existing clients.
+c. Documentation
+Provide detailed API documentation using tools like Swagger or OpenAPI so developers can easily understand and use the wallet API.
+8. Testing and Validation
+a. Unit Testing
+Use JUnit or TestNG for unit testing individual components of the wallet API.
+b. Integration Testing
+Perform integration testing to verify that the wallet API works correctly with external services like payment gateways.
+c. Load Testing
+Use tools like JMeter or Gatling to simulate heavy traffic and ensure your API can handle high loads.
+d. Security Testing
+Perform penetration testing and vulnerability assessments to identify and fix potential security weaknesses.
+9. Third-party Integrations
+a. Payment Gateways
+If the wallet API interacts with payment gateways, ensure secure and reliable integrations using industry-standard protocols.
+b. Bank Integrations
+Consider integration with banking APIs for handling fund transfers to/from bank accounts.
+c. Notifications
+Provide mechanisms for sending email or SMS notifications for transactions, balance updates, or any significant changes in the wallet.
+10. Regulatory Compliance
+Ensure that your wallet API complies with relevant financial regulations:
+
+a. KYC (Know Your Customer)
+Implement identity verification mechanisms to comply with KYC regulations.
+b. AML (Anti-Money Laundering)
+Implement transaction monitoring and reporting mechanisms to detect and prevent money laundering activities.
+11. User Experience
+a. Error Messages
+Provide clear, actionable error messages for users when something goes wrong (e.g., insufficient funds, failed transaction).
+b. Notifications and Receipts
+Ensure users receive notifications (via email or SMS) for successful and failed transactions.
+12. Blockchain (Optional)
+If you're building a crypto-wallet, consider using blockchain technology for security and transparency.
+Integrating with blockchain APIs will introduce additional considerations such as managing keys, transaction times, and gas fees.
+
+What is RBAC ?
+In frameworks like Spring Security (used in Java and Spring Boot applications), you can implement RBAC by defining roles (e.g., ROLE_ADMIN, ROLE_USER)
+and mapping them to users. Then, security rules are applied based on the roles assigned to the logged-in user.
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+            .authorizeRequests()
+                .antMatchers("/admin/**").hasRole("ADMIN")  // Only admins can access /admin
+                .antMatchers("/user/**").hasRole("USER")    // Only users can access /user
+                .antMatchers("/", "/public/**").permitAll() // Public access for everyone
+                .and()
+            .formLogin();
+    }
+}
+
+spring boot jwt https://www.youtube.com/watch?v=X80nJ5T7YpE (Very imp - no sessions is maintained)
+
+Good Example : Someone fed the wrong data in old payments system.Batch files coming from banks,which comes to move money was not handling wallet accounts,it was doing in old traditional way .
+           Api call was taking more time.Alert monitoring tool
+
+Example of load balancers : External Load Balancers (e.g., Nginx, AWS ELB)
+
+Bitgo
+// Palo Alto - Linked List Infix to postfix sliding window problem related to substring Design payment systems like Venmo
+// "How would you design Twitter?"
+// Climbing ladders dynamic programming problem https://www.youtube.com/watch?v=Y0lT9Fck7qI ,https://www.youtube.com/watch?v=uHAToNgAPaM&t=50s
+// Array problem, find the maximum area in a bar graph.
+// Design snake & ladder game with running code.
+// Process bitcoin blocks and write some query api on top of the processes data.
+// Number of islands in a grid
+// Design in Memory database
+// 1. Stock selling coding question 2. Bitcoin transaction based system design
+// 2 leetcode medium questions related to recursion and window sliding
+
+he maximum RPS (requests per second) in payment systems can vary widely depending on the scale and infrastructure of the platform. Here's a general range:
+
+Small to Medium Payment Gateways: Around 500 to 5,000 RPS. These systems typically serve smaller merchants and may rely on cloud infrastructure.
+
+Large Payment Platforms (e.g., Stripe, PayPal): Between 10,000 to 100,000+ RPS during peak times. Large, scalable architectures using distributed systems allow them to handle such volumes.
+
+High-End Financial Institutions (e.g., Visa, Mastercard): These systems can handle up to millions of RPS. For instance, Visa is reported to handle over
+65,000 transaction messages per second globally but can scale much higher, especially during peak events like Black Friday.
